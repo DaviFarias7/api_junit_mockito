@@ -44,6 +44,12 @@ public class UserServiceimpl implements UserService {
         return repository.save(mapper.map(obj, User.class));
     }
 
+    @Override
+    public void delete(Integer id) {
+        findByid(id);
+        repository.deleteById(id);
+    }
+
     private void findByEmail(UserDTO obj){
         Optional<User> user = repository.findByEmail(obj.getEmail());
         if(user.isPresent() && !user.get().getId().equals(obj.getId())){
