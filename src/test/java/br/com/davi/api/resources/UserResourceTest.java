@@ -2,7 +2,6 @@ package br.com.davi.api.resources;
 
 import br.com.davi.api.domain.User;
 import br.com.davi.api.domain.dto.UserDTO;
-import br.com.davi.api.repositories.UserRepository;
 import br.com.davi.api.services.impl.UserServiceimpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +10,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class UserResourceTest {
@@ -23,10 +29,10 @@ class UserResourceTest {
     public static final int INDEX = 0;
 
     @InjectMocks
-    private UserServiceimpl service;
+    private UserResource resource;
 
     @Mock
-    private UserRepository repository;
+    private UserServiceimpl service;
 
     @Mock
     private ModelMapper mapper;
@@ -41,7 +47,18 @@ class UserResourceTest {
     }
 
     @Test
-    void findById() {
+    void whenFindByIdThenReturnSuccsess() {
+        when(service.findByid(anyInt())).thenReturn(user);
+        when(mapper.map(any(), any())).thenReturn(userDTO);
+
+        ResponseEntity<UserDTO> response = resource.findById(ID);
+
+        assertNotNull(resource);
+        assertNotNull(response.getBody());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(UserDTO.class, response.getBody().getClass());
+
+
     }
 
     @Test
