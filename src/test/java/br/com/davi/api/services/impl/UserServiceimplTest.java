@@ -154,12 +154,6 @@ class UserServiceimplTest {
         verify(repository, times(1)).deleteById(anyInt());
     }
 
-    private void startUser(){
-        user = new User(ID, NAME, EMAIL, PASSWORD);
-        userDTO = new UserDTO(ID, NAME, EMAIL, PASSWORD);
-        optionalUser = Optional.of(new User(ID, NAME, EMAIL, PASSWORD));
-    }
-
     @Test
     void deleteWithObjectNotFoundException(){
         when(repository.findById(anyInt())).thenThrow(new ObjectNotFoundException(OBJETO_NAO_ENCONTRADO));
@@ -170,5 +164,11 @@ class UserServiceimplTest {
             assertEquals(ObjectNotFoundException.class, ex.getClass());
             assertEquals(OBJETO_NAO_ENCONTRADO, ex.getMessage());
         }
+    }
+
+    private void startUser(){
+        user = new User(ID, NAME, EMAIL, PASSWORD);
+        userDTO = new UserDTO(ID, NAME, EMAIL, PASSWORD);
+        optionalUser = Optional.of(new User(ID, NAME, EMAIL, PASSWORD));
     }
 }
