@@ -58,6 +58,10 @@ class UserResourceTest {
         assertEquals(ResponseEntity.class, response.getClass());
         assertEquals(UserDTO.class, response.getBody().getClass());
 
+        assertEquals(ID, response.getBody().getId());
+        assertEquals(NAME, response.getBody().getName());
+        assertEquals(PASSWORD, response.getBody().getPassword());
+        assertEquals(EMAIL, response.getBody().getEmail());
 
     }
 
