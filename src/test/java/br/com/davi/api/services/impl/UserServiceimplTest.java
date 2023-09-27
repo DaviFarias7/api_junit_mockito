@@ -77,7 +77,7 @@ class UserServiceimplTest {
     void whenFindAllThenReturnAnListOfUsers() {
         when(repository.findAll()).thenReturn(List.of(user));
 
-        List<User> response = repository.findAll();
+        List<User> response = service.findAll(); // Call the service method
 
         assertNotNull(response);
         assertEquals(1, response.size());
@@ -87,7 +87,6 @@ class UserServiceimplTest {
         assertEquals(NAME, response.get(INDEX).getName());
         assertEquals(EMAIL, response.get(INDEX).getEmail());
         assertEquals(PASSWORD, response.get(INDEX).getPassword());
-
     }
 
     @Test
